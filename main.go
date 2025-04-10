@@ -17,7 +17,7 @@ func main() {
 
 //getAllTasks open file read it
 //and return full tasks in it
-func getAllTasks() []task{
+func getAllTasks() []Task{
 	file, err := os.Open("../listOfTasks")
 	if err != nil {
 		log.Fatal(err)

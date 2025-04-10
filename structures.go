@@ -1,6 +1,6 @@
 package main
 
-type task struct {
+type Task struct {
 	id   int32
 	text string
 }
