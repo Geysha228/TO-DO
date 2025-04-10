@@ -1,6 +1,11 @@
 package main
 
-import "github.com/labstack/echo/v4"
+import (
+	"log"
+	"os"
+
+	"github.com/labstack/echo/v4"
+)
 
 type task struct{
 	id int32
@@ -16,5 +21,11 @@ func main() {
 }
 
 func getAllTasks() []task{
+	file, err := os.Open("../listOfTasks")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer file.Close()
 
 }
