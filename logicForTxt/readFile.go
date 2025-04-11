@@ -18,6 +18,8 @@ func ReadFileF(file os.File) []models.Task{
 
 	scanner := bufio.NewScanner(&file)
 
+	file.Seek(0,0)
+
 	for scanner.Scan(){
 		line := scanner.Text()
 

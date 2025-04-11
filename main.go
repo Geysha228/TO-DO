@@ -1,25 +1,29 @@
 package main
 
 import (
-	models "TO-DO/Models"
 	logicfortxt "TO-DO/logicForTxt"
-	"fmt"
 	"log"
+	"net/http"
 	"os"
+
+	"github.com/labstack/echo/v4"
 )
 
 
 func main() {
 	//New instance of Echo
-	// e := echo.New()
+	e := echo.New()
 
-	res := getAllTasks()
-	fmt.Println(res)
+	e.GET("/getAllTasks", getAllTasks)
+	e.Logger.Fatal(e.Start(":3000"))
 }
+
+
+
 
 //getAllTasks open file read it
 //and return full tasks in it
-func getAllTasks() []models.Task{
+func getAllTasks(c echo.Context) error{
 	file, err := os.Open("D:\\GoProjects\\TO-DO\\listOfTasks.txt")
 	if err != nil {
 		log.Fatal(err)
@@ -27,6 +31,6 @@ func getAllTasks() []models.Task{
 	
 	defer file.Close()
 
-	return logicfortxt.ReadFileF(*file)
+	return c.JSON(http.StatusOK, logicfortxt.ReadFileF(*file)) 
 
 }
